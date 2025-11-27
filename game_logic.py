@@ -13,25 +13,30 @@ def get_random_word():
 def display_game_state(mistakes, secret_word, guessed_letters):
     """Displays the snowman stage and the current word state."""
     print("\n" + STAGES[mistakes])
+
     display_word = ""
     for letter in secret_word:
         if letter in guessed_letters:
             display_word += letter + " "
         else:
             display_word += "_ "
+
     print("\nWord:", display_word, "\n")
 
 
 def play_game():
+    """Runs a single round of the Snowman Meltdown game."""
     secret_word = get_random_word()
     guessed_letters = []
     mistakes = 0
     max_mistakes = len(STAGES) - 1
 
     print("Welcome to Snowman Meltdown!\n")
-    print("="*40)
+    print("=" * 40)
 
     while True:
+
+        # Display current game state
         display_game_state(mistakes, secret_word, guessed_letters)
 
         # Check for win
@@ -52,6 +57,7 @@ def play_game():
         if len(guess) != 1 or not guess.isalpha():
             print("⚠️ Please enter a single alphabetical character.\n")
             continue
+
         if guess in guessed_letters:
             print("⚠️ You already guessed that letter!\n")
             continue
